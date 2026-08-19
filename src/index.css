@@ -1,0 +1,79 @@
+/* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP OF THIS FILE, ABOVE THE TAILWIND IMPORTS — DO NOT DELETE THIS COMMENT */
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* CRITICAL: THE FOLLOWING TAILWIND IMPORTS MUST NEVER BE DELETED OR REORDERED — DO NOT DELETE THIS COMMENT */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* END TAILWIND IMPORTS — ALL OTHER CSS MUST GO BELOW THIS LINE */
+
+html {
+  scroll-behavior: smooth;
+  background-color: #030809;
+}
+body {
+  background-color: #030809;
+  color: #e6f6f4;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+#root {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+::selection {
+  background: rgba(46, 230, 214, 0.28);
+  color: #e6f6f4;
+}
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(46, 230, 214, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46, 230, 214, 0.08) 1px, transparent 1px),
+    radial-gradient(circle at 30% 20%, rgba(46, 230, 214, 0.12), transparent 42%);
+  background-size: 36px 36px, 36px 36px, 100% 100%;
+  mask-image: radial-gradient(circle at center, black 35%, transparent 100%);
+  opacity: 0.7;
+}
+.hero-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(3, 8, 9, 0.15), rgba(3, 8, 9, 0.5) 45%, rgba(3, 8, 9, 0.15));
+}
+/* Custom cursor: hide the native pointer only on precise-pointer devices */
+@media (hover: hover) and (pointer: fine) {
+  html.omne-cursor,
+  html.omne-cursor * {
+    cursor: none !important;
+  }
+}
+:focus-visible {
+  outline: 2px solid #2ee6d6;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.omne-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.omne-scroll::-webkit-scrollbar-thumb {
+  background: rgba(46, 230, 214, 0.3);
+  border-radius: 999px;
+}
+.omne-hairline {
+  background-image: linear-gradient(90deg, rgba(46, 230, 214, 0) 0%, rgba(46, 230, 214, 0.5) 50%, rgba(46, 230, 214, 0) 100%);
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
