@@ -1,11 +1,35 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRightIcon, MailIcon, MapPinIcon, PhoneIcon } from 'lucide-react';
+import { ArrowUpRightIcon, MailIcon, MapPinIcon } from 'lucide-react';
 import { SimulationScene } from './SimulationScene';
 import { contactInfo, socialLinks } from '../data/site';
 import { socialIconMap } from './SocialIcons';
 import { useSectionNav } from '../hooks/useSectionNav';
 import { useUI } from '../contexts/UIContext';
+
+function LocationMap({
+  src,
+  title,
+  className = '',
+}: {
+  src: string;
+  title: string;
+  className?: string;
+}) {
+  return (
+    <div className={`map-container h-full overflow-hidden rounded-lg border border-cyan/20 ${className}`}>
+      <iframe
+        src={src}
+        width="100%"
+        height="100%"
+        style={{ border: 0, minHeight: '260px' }}
+        allowFullScreen
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        title={title}
+      />
+    </div>
+  );
+}
 
 type Item = {label: string;section?: string;path?: string;modal?: 'docs' | 'contact' | 'register';};
 
@@ -25,17 +49,14 @@ const columns: {title: string;items: Item[];}[] = [
   items: [
   { label: 'About', path: '/about' },
   { label: 'Team', path: '/about' },
-  { label: 'Contact', section: 'contact' },
-  { label: 'Careers', modal: 'contact' }]
+  { label: 'Contact', section: 'contact' }]
 
 },
 {
   title: 'Resources',
   items: [
-  { label: 'Documentation', modal: 'docs' },
   { label: 'Technology', section: 'technology' },
-  { label: 'FAQ', section: 'faq' },
-  { label: 'Updates', modal: 'docs' }]
+  { label: 'FAQ', section: 'faq' }]
 
 },
 {
@@ -127,61 +148,88 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="grid gap-8 border-b border-cyan/15 py-8 sm:grid-cols-3">
-          <a
-            href={`mailto:${contactInfo.email}`}
-            data-cursor="MAIL"
-            className="group flex items-start gap-3 text-sm text-mist transition-colors duration-200 ease-out hover:text-cyan">
-            
-            <MailIcon className="mt-0.5 h-4 w-4 text-cyan/70" />
-            <span>
-              <span className="block font-mono text-[10px] uppercase tracking-tech text-cyan/60">General</span>
-              {contactInfo.email}
-            </span>
-          </a>
-          <div className="flex items-start gap-3 text-sm text-mist">
-            <MapPinIcon className="mt-0.5 h-4 w-4 shrink-0 text-cyan/70" />
-            <div>
-              <span className="block font-mono text-[10px] uppercase tracking-tech text-cyan/60">Sri Lanka</span>
-              <strong className="mt-1 block font-display text-sm uppercase tracking-[0.08em] text-chalk">
-                OmneScene Technologies (Pvt) Ltd.
-              </strong>
-              <span className="mt-2 block leading-relaxed">
-                73 Havelock Road, Colombo 05,<br /> Sri Lanka
+        <div className="grid gap-8 border-b border-cyan/15 py-8 lg:grid-cols-2">
+          <div className="flex flex-col gap-6">
+            <a
+              href={`mailto:${contactInfo.email}`}
+              data-cursor="MAIL"
+              className="group flex items-start gap-3 text-sm text-mist transition-colors duration-200 ease-out hover:text-cyan">
+              
+              <MailIcon className="mt-0.5 h-4 w-4 text-cyan/70" />
+              <span>
+                <span className="block font-mono text-[10px] uppercase tracking-tech text-cyan/60">General</span>
+                {contactInfo.email}
               </span>
-              <a
-                href="tel:+14155558743"
-                data-cursor="CALL"
-                className="mt-2 block transition-colors duration-200 ease-out hover:text-cyan">
-                +1 415 555 8743
-              </a>
+            </a>
+            <div className="grid gap-6 sm:grid-cols-2">
+              <div className="flex items-start gap-3 text-sm text-mist">
+                <MapPinIcon className="mt-0.5 h-4 w-4 shrink-0 text-cyan/70" />
+                <div>
+                  <span className="block font-mono text-[10px] uppercase tracking-tech text-cyan/60">Sri Lanka</span>
+                  <strong className="mt-1 block font-display text-sm uppercase tracking-[0.08em] text-chalk">
+                    OmneScene Technologies (Pvt) Ltd.
+                  </strong>
+                  <span className="mt-2 block leading-relaxed">
+                    73 Havelock Road, Colombo 05,<br /> Sri Lanka
+                  </span>
+                  <a
+                    href="tel:+94112396745"
+                    data-cursor="CALL"
+                    className="mt-2 block transition-colors duration-200 ease-out hover:text-cyan">
+                    +94 11 239 6745
+                  </a>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 text-sm text-mist">
+                <MapPinIcon className="mt-0.5 h-4 w-4 shrink-0 text-cyan/70" />
+                <div>
+                  <span className="block font-mono text-[10px] uppercase tracking-tech text-cyan/60">USA</span>
+                  <strong className="mt-1 block font-display text-sm uppercase tracking-[0.08em] text-chalk">
+                    OmneScene AI Inc.
+                  </strong>
+                  <span className="mt-2 block leading-relaxed">
+                    201 Mission Street, Suite 1200,<br /> San Francisco, CA 94105, USA
+                  </span>
+                  <a
+                    href="tel:+14155558743"
+                    data-cursor="CALL"
+                    className="mt-2 block transition-colors duration-200 ease-out hover:text-cyan">
+                    +1 415 555 8743
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="flex items-start gap-3 text-sm text-mist">
-            <MapPinIcon className="mt-0.5 h-4 w-4 shrink-0 text-cyan/70" />
-            <div>
-              <span className="block font-mono text-[10px] uppercase tracking-tech text-cyan/60">USA</span>
-              <strong className="mt-1 block font-display text-sm uppercase tracking-[0.08em] text-chalk">
-                OmneScene AI Inc.
-              </strong>
-              <span className="mt-2 block leading-relaxed">
-                201 Mission Street, Suite 1200,<br /> San Francisco, CA 94105, USA
-              </span>
-              <a
-                href="tel:+14155558743"
-                data-cursor="CALL"
-                className="mt-2 block transition-colors duration-200 ease-out hover:text-cyan">
-                +1 415 555 8743
-              </a>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.18em] text-cyan/70">
+                <MapPinIcon className="h-3.5 w-3.5 text-cyan/70" />
+                Sri Lanka Office
+              </div>
+              <LocationMap
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3277.087510961921!2d79.86504938644204!3d6.890413949465937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25bd083ab548d%3A0x48969b6c62cfbb94!2s73%20Havelock%20Rd%2C%20Colombo%2006000!5e1!3m2!1sen!2slk!4v1787985693526!5m2!1sen!2slk"
+                title="OmneScene Sri Lanka location"
+              />
+            </div>
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.18em] text-cyan/70">
+                <MapPinIcon className="h-3.5 w-3.5 text-cyan/70" />
+                United States Office
+              </div>
+              <LocationMap
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2596.440087735631!2d-122.42653312491395!3d37.7392075719944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808f7e68b415caf3%3A0x14632cd989156a41!2sMission%20St%2C%20California%2C%20USA!5e1!3m2!1sen!2slk!4v1788233899290!5m2!1sen!2slk"
+                title="OmneScene USA location"
+              />
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <span className="font-display text-sm font-bold uppercase tracking-[0.3em] text-cyan">
-            {contactInfo.domain}
-          </span>
-          <span className="font-mono text-[10px] uppercase tracking-tech text-mist/60">© 2026 OmneScene</span>
+        <div className="flex justify-center pt-6">
+          <div className="flex items-center gap-3 text-center font-mono text-[10px] uppercase tracking-tech text-mist/70">
+            <span className="text-cyan">■</span>
+            <span>© 2026 omnescene.com.</span>
+            <span>All rights reserved.</span>
+          </div>
         </div>
       </div>
     </footer>);

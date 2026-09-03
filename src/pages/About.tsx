@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRightIcon } from 'lucide-react';
 import { SimulationScene } from '../components/SimulationScene';
 import { Eyebrow, Headline, Lede } from '../components/Typography';
 import { ActionButton } from '../components/Button';
@@ -35,7 +34,7 @@ export function About() {
 
   return (
     <main>
-      <section className="relative isolate flex min-h-[86svh] flex-col justify-end overflow-hidden px-5 pb-14 pt-32 sm:px-8">
+      <section className="relative isolate flex min-h-[76svh] flex-col justify-end overflow-hidden px-5 pb-10 pt-24 sm:px-8 sm:pt-28 lg:pb-14">
         <div className="absolute inset-0 -z-10">
           <SimulationScene
             kind="robot"
@@ -53,7 +52,7 @@ export function About() {
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-chalk/80">
             OmneScene is a simulation company. We make the environments, physics and scenarios that let robotics and
-            automotive teams find out what their systems do — before those systems move in the real world.
+              automotive teams find out what their systems do before those systems move in the real world.
           </p>
         </div>
       </section>
@@ -78,7 +77,7 @@ export function About() {
             </Lede>
             <p className="mt-5 max-w-2xl text-sm leading-relaxed text-mist sm:text-base">
               We started OmneScene because generating scenarios by hand does not scale, and because the rarest
-              failures — the ones that actually matter — only appear in volume. The platform exists to produce that
+              failures, the ones that actually matter, only appear in volume. The platform exists to produce that
               volume with physical fidelity intact.
             </p>
 
@@ -119,7 +118,7 @@ export function About() {
               transition={{ duration: 0.45, delay: i % 3 * 0.06, ease: [0.23, 1, 0.32, 1] }}
               className="flex flex-col">
               
-                <div className="relative mx-auto w-full max-w-[440px] overflow-hidden sm:max-w-[480px] lg:max-w-[520px]">
+                <div className="relative mx-auto w-full max-w-[220px] overflow-hidden sm:max-w-[250px] lg:max-w-[280px]">
                   <img
                   src={member.image}
                   alt={`${member.name}, ${member.role} at OmneScene`}
@@ -134,15 +133,6 @@ export function About() {
                 </h3>
                 <p className="mt-1 font-mono text-[10px] uppercase tracking-tech text-cyan/80">{member.role}</p>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-mist">{member.bio}</p>
-                <a
-                href={member.linkedin}
-                target="_blank"
-                rel="noreferrer noopener"
-                data-cursor="PROFILE"
-                className="mt-4 inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-tech text-cyan transition-colors duration-200 ease-out hover:text-cyan-soft">
-                
-                  LinkedIn <ArrowUpRightIcon className="h-3 w-3" />
-                </a>
               </motion.li>
             )}
           </ul>

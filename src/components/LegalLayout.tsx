@@ -53,9 +53,13 @@ export function LegalLayout({ eyebrow, title, updated, intro, sections }: Props)
                 </h2>
                 <div className="mt-4 space-y-4">
                   {s.body.map((p, pi) =>
+                typeof p === 'string' ?
                 <p key={pi} className="text-[15px] leading-7 text-mist">
-                      {p}
-                    </p>
+                    {p}
+                  </p> :
+                <div key={pi} className="text-[15px] leading-7 text-mist">
+                    {p}
+                  </div>
                 )}
                 </div>
               </section>

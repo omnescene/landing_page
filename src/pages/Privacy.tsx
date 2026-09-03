@@ -1,5 +1,6 @@
 import React from 'react';
 import { LegalLayout, type LegalSection } from '../components/LegalLayout';
+import { contactInfo } from '../data/site';
 
 const sections: LegalSection[] = [
 {
@@ -107,7 +108,19 @@ const sections: LegalSection[] = [
   title: 'Contact Us',
   body: [
   <p>If You have any questions about this Privacy Policy, You can contact Us:</p>,
-  <ul><li>By email: support@omnescene.com</li><li>By visiting this page on Our Website: <a href="https://omnescene.com/" target="_blank" rel="noopener noreferrer" className="text-cyan hover:text-cyan-soft">omnescene.com</a></li><li>By phone: +94 11 239 6745</li></ul>]
+  <div className="space-y-6">
+    {contactInfo.offices.map((office) =>
+    <div key={office.region} className="border-l-2 border-cyan/40 pl-4">
+      <h3 className="font-display text-base font-bold uppercase tracking-[0.08em] text-chalk">{office.region}</h3>
+      <p className="mt-2"><strong>{office.company}</strong><br />{office.address}</p>
+      <p className="mt-2">Phone: <a href={`tel:${office.phoneHref}`} className="text-cyan hover:text-cyan-soft">{office.phone}</a></p>
+    </div>
+    )}
+    <div className="space-y-2 border-t border-cyan/15 pt-4">
+      <p>Email: <a href={`mailto:${contactInfo.email}`} className="text-cyan hover:text-cyan-soft">{contactInfo.email}</a></p>
+      <p>Website: <a href={contactInfo.website} target="_blank" rel="noopener noreferrer" className="text-cyan hover:text-cyan-soft">{contactInfo.website}</a></p>
+    </div>
+  </div>]
 
 }];
 

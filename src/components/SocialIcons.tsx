@@ -36,6 +36,33 @@ export function XIconBrand({ className = base }: IconProps) {
 
 }
 
+export function F6SIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <text x="2" y="16" fontSize="9" fontWeight="700" letterSpacing="-0.5">F6S</text>
+    </svg>);
+}
+
+export function CrunchbaseIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
+      <text
+        x="50%"
+        y="56%"
+        textAnchor="middle"
+        dominantBaseline="middle"
+        fontSize="11"
+        fontWeight="700"
+        fill="currentColor"
+        fontFamily="Arial, Helvetica, sans-serif"
+        letterSpacing="-0.8"
+      >
+        cb
+      </text>
+    </svg>
+  );
+}
+
 export function PinterestIcon({ className = base }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
@@ -49,5 +76,7 @@ export const socialIconMap: Record<string, React.ComponentType<IconProps>> = {
   youtube: YouTubeIcon,
   facebook: FacebookIcon,
   x: XIconBrand,
-  pinterest: PinterestIcon
+  pinterest: PinterestIcon,
+  f6s: F6SIcon,
+  crunchbase: CrunchbaseIcon
 };

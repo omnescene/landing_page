@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# Let real files, directories, and API endpoints resolve normally.
+RewriteCond %{REQUEST_URI} !^/api/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [L]

@@ -98,7 +98,7 @@ export function GraphicShowcase() {
                   aria-label={item.visualDescription}
                 >
                   <img
-                    src={`/solutions${Number(item.kicker) === 1 ? '' : ' '}(${Number(item.kicker)}).png`}
+                    src={`/solutions${Number(item.kicker) === 1 ? '' : ' '}(${Number(item.kicker)}).webp`}
                     alt={item.visualDescription}
                     className="h-full w-full object-cover"
                   />

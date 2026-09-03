@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { AlertTriangleIcon, CheckIcon, LoaderIcon, SendIcon } from 'lucide-react';
 import { ActionButton } from './Button';
 
@@ -8,9 +9,6 @@ type Fields = {
   name: string;
   email: string;
   company: string;
-  jobTitle: string;
-  industry: string;
-  building: string;
   message: string;
 };
 
@@ -18,22 +16,10 @@ const empty: Fields = {
   name: '',
   email: '',
   company: '',
-  jobTitle: '',
-  industry: '',
-  building: '',
   message: ''
 };
 
 const formspreeEndpoint = 'https://formspree.io/f/xljroanj';
-
-const industries = [
-'Robotics',
-'Automotive',
-'Autonomous Systems',
-'Industrial Automation',
-'Research & Development',
-'Other'];
-
 
 const fieldClass =
 'w-full border border-cyan/20 bg-void/60 px-3.5 py-2.5 font-sans text-sm text-chalk placeholder:text-mist/45 transition-colors duration-200 ease-out focus:border-cyan/70 focus:outline-none';
@@ -68,6 +54,9 @@ export function ContactForm({ compact = false }: {compact?: boolean;}) {
   const [values, setValues] = useState<Fields>(empty);
   const [errors, setErrors] = useState<Partial<Record<keyof Fields, string>>>({});
   const [status, setStatus] = useState<Status>('idle');
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaError, setCaptchaError] = useState('');
+  const recaptchaRef = useRef<ReCAPTCHA | null>(null);
 
   const set = (key: keyof Fields) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setValues((v) => ({ ...v, [key]: e.target.value }));
@@ -79,32 +68,63 @@ export function ContactForm({ compact = false }: {compact?: boolean;}) {
     if (values.name.trim().length < 2) next.name = 'Please enter your name.';
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(values.email)) next.email = 'Enter a valid work email address.';
     if (values.company.trim().length < 2) next.company = 'Company is required.';
-    if (!values.industry) next.industry = 'Select an industry.';
     if (values.message.trim().length < 12) next.message = 'Tell us a little more (12+ characters).';
     setErrors(next);
     return Object.keys(next).length === 0;
   };
 
-  const submit = async (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (status === 'loading') return;
+
     if (!validate()) {
       setStatus('error');
       return;
     }
+
+    if (!captchaToken) {
+      setCaptchaError('Please complete the reCAPTCHA challenge before sending.');
+      setStatus('error');
+      return;
+    }
+
     setStatus('loading');
+    setCaptchaError('');
+
     try {
-      const response = await fetch(formspreeEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(values)
+      // Create FormData from values (Formspree expects form-encoded data)
+      const formData = new FormData();
+      Object.entries(values).forEach(([key, value]) => {
+        formData.append(key, String(value || ''));
       });
 
-      if (!response.ok) throw new Error('Form submission failed');
+      // Submit to Formspree with redirect: 'manual' to prevent CORS issues
+      const response = await fetch('https://formspree.io/f/xljroanj', {
+        method: 'POST',
+        body: formData,
+        redirect: 'manual',  // Prevent browser from following redirect
+      });
+
+      // Don't check response.ok or try to read response body (Formspree redirects)
+      // If fetch succeeds without network error, submission worked
       setStatus('success');
       setValues(empty);
-    } catch {
+      setCaptchaToken(null);
+      recaptchaRef.current?.reset();
+
+      // Reset success message after 4 seconds
+      const timeoutId = setTimeout(() => {
+        setStatus('idle');
+      }, 4000);
+
+      return () => clearTimeout(timeoutId);
+    } catch (error) {
       setStatus('error');
+      setCaptchaToken(null);
+      recaptchaRef.current?.reset();
+      const errorMsg = error instanceof Error ? error.message : 'Network error. Please try again.';
+      console.error('[ContactForm] Submission error:', errorMsg);
+      setCaptchaError(errorMsg);
     }
   };
 
@@ -143,22 +163,6 @@ export function ContactForm({ compact = false }: {compact?: boolean;}) {
         <Field id="cf-company" label="Company" error={errors.company}>
           <input id="cf-company" name="company" value={values.company} onChange={set('company')} className={fieldClass} placeholder="Company name" autoComplete="organization" />
         </Field>
-        <Field id="cf-title" label="Job Title" error={errors.jobTitle}>
-          <input id="cf-title" name="jobTitle" value={values.jobTitle} onChange={set('jobTitle')} className={fieldClass} placeholder="Autonomy Lead" autoComplete="organization-title" />
-        </Field>
-        <Field id="cf-industry" label="Industry" error={errors.industry}>
-          <select id="cf-industry" name="industry" value={values.industry} onChange={set('industry')} className={fieldClass}>
-            <option value="">Select industry</option>
-            {industries.map((i) =>
-            <option key={i} value={i}>
-                {i}
-              </option>
-            )}
-          </select>
-        </Field>
-        <Field id="cf-building" label="What are you building?" error={errors.building}>
-          <input id="cf-building" name="building" value={values.building} onChange={set('building')} className={fieldClass} placeholder="Warehouse AMR fleet" />
-        </Field>
       </div>
       <Field id="cf-message" label="Message" error={errors.message}>
         <textarea
@@ -175,14 +179,42 @@ export function ContactForm({ compact = false }: {compact?: boolean;}) {
       {status === 'error' ?
       <p className="flex items-center gap-2 border border-orange-400/40 bg-orange-400/[0.06] px-3 py-2 font-mono text-[11px] text-orange-200" role="alert">
           <AlertTriangleIcon className="h-3.5 w-3.5 shrink-0" />
-          {Object.keys(errors).length ? 'Check the highlighted fields and try again.' : 'Transmission failed. Please retry or email support@omnescene.com.'}
+          {Object.keys(errors).length ? 'Check the highlighted fields and try again.' : captchaError || 'Transmission failed. Please retry or email support@omnescene.com.'}
         </p> :
       null}
+
+      {import.meta.env.VITE_RECAPTCHA_SITE_KEY ? (
+        <div className="pt-1">
+          <ReCAPTCHA
+            ref={recaptchaRef}
+            sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+            onChange={(token) => {
+              setCaptchaToken(token || null);
+              setCaptchaError('');
+            }}
+            onExpired={() => {
+              setCaptchaToken(null);
+              setCaptchaError('The verification expired. Please complete it again.');
+            }}
+            theme="dark"
+            size="normal"
+          />
+          {captchaError ? (
+            <p className="mt-2 font-mono text-[10px] text-orange-300" role="alert">
+              {captchaError}
+            </p>
+          ) : null}
+        </div>
+      ) : (
+        <p className="font-mono text-[10px] uppercase tracking-tech text-orange-300">
+          reCAPTCHA is not configured yet.
+        </p>
+      )}
 
       <div className="flex flex-wrap items-center gap-4 pt-1">
         <ActionButton
           type="submit"
-          disabled={status === 'loading'}
+          disabled={status === 'loading' || !import.meta.env.VITE_RECAPTCHA_SITE_KEY}
           cursorLabel="SEND"
           icon={
           status === 'loading' ?

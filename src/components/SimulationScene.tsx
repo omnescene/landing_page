@@ -49,6 +49,7 @@ export function SimulationScene({ className = '', ariaLabel, ...config }: Props)
     const io = new IntersectionObserver(
       (entries) => {
         visible = entries[0]?.isIntersecting ?? true;
+        if (visible && !raf) raf = window.requestAnimationFrame(draw);
       },
       { rootMargin: '120px' }
     );
@@ -56,7 +57,7 @@ export function SimulationScene({ className = '', ariaLabel, ...config }: Props)
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       w = rect.width;
       h = rect.height;
       canvas.width = Math.max(1, Math.floor(w * dpr));
@@ -66,7 +67,7 @@ export function SimulationScene({ className = '', ariaLabel, ...config }: Props)
 
     const draw = () => {
       if (!visible) {
-        raf = window.requestAnimationFrame(draw);
+        raf = 0;
         return;
       }
       const c = cfg.current;

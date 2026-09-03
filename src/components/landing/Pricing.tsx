@@ -15,6 +15,11 @@ export function Pricing() {
   const isEnterprise = active.id === 'enterprise';
   const displayPrice = isEnterprise ? active.price : billing === 'monthly' ? (active.monthlyPrice ?? active.price) : (active.annualPrice ?? active.price);
 
+  const handleCheckout = () => {
+    const paymentLink = active.paymentLinks?.[billing];
+    if (paymentLink) window.open(paymentLink, '_blank', 'noopener,noreferrer');
+  };
+
   useEffect(() => {
     if (!isEnterprise) setBilling('monthly');
   }, [activeId, isEnterprise]);
@@ -50,7 +55,7 @@ export function Pricing() {
                   type="button"
                   onClick={() => setActiveId(tier.id)}
                   data-cursor="SELECT"
-                  className="relative px-3 py-5 text-left transition-colors duration-200 ease-out sm:px-6">
+                  className="relative min-w-0 px-1 py-5 text-left transition-colors duration-200 ease-out sm:px-6">
                   
                   {isActive ?
                   <motion.span
@@ -70,7 +75,7 @@ export function Pricing() {
                   null}
                   <span className="relative block">
                     <span
-                      className={`block font-display text-lg font-extrabold uppercase tracking-[0.16em] transition-colors duration-200 ease-out sm:text-2xl ${
+                      className={`block whitespace-nowrap font-display text-[10px] font-extrabold uppercase tracking-[0.04em] transition-colors duration-200 ease-out sm:text-2xl sm:tracking-[0.16em] ${
                       isActive ? 'text-cyan' : 'text-chalk/70'}`
                       }>
                       
@@ -136,7 +141,7 @@ export function Pricing() {
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 {active.id !== 'enterprise' ? (
-                  <ActionButton onClick={() => openModal('register', active.name)} cursorLabel="START">
+                  <ActionButton onClick={handleCheckout} cursorLabel="START">
                     Checkout
                   </ActionButton>
                 ) : null}
@@ -153,7 +158,7 @@ export function Pricing() {
               <div key={f.label} className="flex items-baseline justify-between gap-6 py-3.5">
                   <dt className="font-mono text-[11px] uppercase tracking-tech text-mist/75">{f.label}</dt>
                   <dd
-                  className={`text-right text-sm ${f.value === '—' ? 'text-mist/40' : 'text-chalk'}`}>
+                  className={`text-right text-sm ${f.value === 'Not included' ? 'text-mist/40' : 'text-chalk'}`}>
                   
                     {f.value}
                   </dd>
@@ -169,7 +174,7 @@ export function Pricing() {
             data-cursor="COMPARE"
             className="font-mono text-[11px] uppercase tracking-tech text-cyan transition-colors duration-200 ease-out hover:text-cyan-soft">
             
-            {compare ? '— Hide full comparison' : '+ Compare all plans'}
+            {compare ? 'Hide full comparison' : '+ Compare all plans'}
           </button>
 
           <motion.div
@@ -204,11 +209,11 @@ export function Pricing() {
                         {f.label}
                       </th>
                       {pricingTiers.map((t) => {
-                      const value = t.features[rowIndex]?.value ?? '—';
+                      const value = t.features[rowIndex]?.value ?? 'Not included';
                       return (
                         <td key={t.id} className="py-3 pr-4 text-sm text-chalk/85">
                             <span className="flex items-center gap-2">
-                              {value === '—' ?
+                              {value === 'Not included' ?
                             <MinusIcon className="h-3 w-3 text-mist/40" /> :
 
                             <CheckIcon className="h-3 w-3 shrink-0 text-cyan" />

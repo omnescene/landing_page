@@ -42,15 +42,26 @@ export function Solutions() {
     <section
       id="solutions"
       ref={ref}
-      className={`relative scroll-mt-28 ${horizontal ? 'lg:min-h-[calc(100vh+520px)] lg:scroll-mt-0' : ''}`}>
-      
+      className={`relative scroll-mt-28 isolate ${horizontal ? 'lg:min-h-[calc(100vh+520px)] lg:scroll-mt-0' : ''}`}>
+
+      {/* Complete background cover to hide BackgroundField */}
+      <div
+        className="fixed inset-0 bg-none pointer-events-none"
+        style={{
+          backgroundColor: '#030809',
+          backgroundImage: 'none',
+          zIndex: -100
+        }}
+      />
+
       <div
         className={
         horizontal ?
-        'lg:sticky lg:top-0 lg:h-[100svh] lg:flex lg:flex-col lg:justify-center lg:py-8' :
-        ''
-        }>
-        
+        'lg:sticky lg:top-0 lg:h-[100svh] lg:flex lg:flex-col lg:justify-center lg:py-8 lg:!bg-transparent bg-none' :
+        '!bg-transparent bg-none'
+        }
+        style={{ backgroundColor: 'transparent', backgroundImage: 'none' }}>
+
         <div className="mx-auto w-full max-w-[1500px] px-5 pt-24 sm:px-8 lg:pt-0">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
@@ -70,7 +81,7 @@ export function Solutions() {
           'lg:max-w-none lg:w-max lg:flex-row lg:gap-14 lg:pb-0 lg:pl-[6vw] lg:pr-[20vw]' :
           'lg:grid lg:grid-cols-2 lg:gap-x-16 lg:gap-y-16'}
           `}>
-            
+
             {[...solutions, ...solutions].map((s, i) => {
               const tall = i % 2 === 0;
               return (
@@ -81,7 +92,7 @@ export function Solutions() {
                   viewport={{ once: true, margin: '-10%' }}
                   transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
                   className={`relative shrink-0 lg:w-[38vw] ${tall ? 'lg:self-start lg:pt-4' : 'lg:self-end lg:pb-16'}`}>
-                  
+
                   <div className="flex items-start gap-5">
                     <span className="font-mono text-[11px] text-cyan/60">{`0${i + 1}`}</span>
                     <div className="min-w-0 flex-1">
@@ -89,7 +100,7 @@ export function Solutions() {
                         className={`font-display font-extrabold uppercase leading-[0.9] tracking-[-0.01em] text-chalk ${
                         tall ? 'text-[10vw] sm:text-[6vw] lg:text-[3.6vw]' : 'text-[8vw] sm:text-[5vw] lg:text-[2.7vw]'}`
                         }>
-                        
+
                         {s.title}
                       </h3>
                       <p className="mt-3 font-display text-sm font-semibold uppercase tracking-[0.14em] text-cyan">
@@ -109,20 +120,25 @@ export function Solutions() {
                   <span
                     className={`absolute -left-6 top-1 hidden h-24 w-px bg-cyan/25 lg:block ${tall ? '' : 'top-auto -bottom-2'}`}
                     aria-hidden="true" />
-                  
+
                 </motion.li>);
 
             })}
           </motion.ul>
       </div>
 
-      <div className="mx-auto w-full max-w-[1500px] px-5 pb-24 pt-14 sm:px-8 lg:pb-28 lg:pt-14">
-        <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,600px)_minmax(280px,1fr)] lg:gap-12">
-          <div className="w-full max-w-[600px] overflow-hidden rounded-2xl border border-cyan/20 bg-void p-2 shadow-[0_0_60px_rgba(46,230,214,0.12)] sm:p-3">
+      <div
+        className="mx-auto w-full max-w-[1500px] px-5 pb-24 pt-14 sm:px-8 lg:pb-28 lg:pt-14 !bg-transparent bg-none"
+        style={{ backgroundColor: 'transparent', backgroundImage: 'none' }}>
+        <div
+          className="grid items-center gap-8 lg:grid-cols-[minmax(0,600px)_minmax(280px,1fr)] lg:gap-12 !bg-transparent bg-none"
+          style={{ backgroundColor: 'transparent', backgroundImage: 'none' }}>
+          <div className="overflow-hidden rounded-none bg-transparent shadow-none" style={{ background: 'transparent', boxShadow: 'none' }}>
             <img
-              src="/dashboard.png"
+              src="/dashboard.webp"
               alt="OmneScene environment explorer dashboard showing simulated environments and system status"
-              className="block aspect-[12/7] max-h-[350px] w-full rounded-xl border border-cyan/10 object-cover"
+              className="block aspect-[12/7] max-h-[350px] w-full max-w-[600px] object-cover bg-transparent"
+              style={{ backgroundColor: 'transparent', backgroundImage: 'none', boxShadow: 'none', borderRadius: '0px' }}
             />
           </div>
 

@@ -14,28 +14,28 @@ type WorldState = {
 };
 
 const worldStates: WorldState[] = [
-{ label: 'Coastal highway · midday · clear', detail: 'Baseline scenario, full sensor visibility.', weather: 'clear', night: false, traffic: 0.6 },
-{ label: 'Dense corridor · dusk · rain', detail: 'Reflective surfaces, degraded LiDAR return.', weather: 'rain', night: false, traffic: 1.4 },
-{ label: 'Urban grid · night · heavy traffic', detail: 'Low light, high agent density, occlusion events.', weather: 'clear', night: true, traffic: 2 },
-{ label: 'Industrial approach · dawn · fog', detail: 'Visibility 31%, generated terrain variation.', weather: 'fog', night: false, traffic: 0.8 }];
+  { label: 'Coastal highway · midday · clear', detail: 'Baseline scenario, full sensor visibility.', weather: 'clear', night: false, traffic: 0.6 },
+  { label: 'Dense corridor · dusk · rain', detail: 'Reflective surfaces, degraded LiDAR return.', weather: 'rain', night: false, traffic: 1.4 },
+  { label: 'Urban grid · night · heavy traffic', detail: 'Low light, high agent density, occlusion events.', weather: 'clear', night: true, traffic: 2 },
+  { label: 'Industrial approach · dawn · fog', detail: 'Visibility 31%, generated terrain variation.', weather: 'fog', night: false, traffic: 0.8 }];
 
 
 const roboticsSignals = [
-{ k: 'LIDAR', v: '128 channel, 20 Hz' },
-{ k: 'Depth sensor', v: 'Stereo, 0.3–14 m' },
-{ k: 'Path planning', v: 'Replanned at 40 Hz' },
-{ k: 'Collision zone', v: '2.6 m dynamic buffer' },
-{ k: 'Object recognition', v: '312 labelled classes' }];
+  { k: 'LIDAR', v: '128 channel, 20 Hz' },
+  { k: 'Depth sensor', v: 'Stereo, 0.3–14 m' },
+  { k: 'Path planning', v: 'Replanned at 40 Hz' },
+  { k: 'Collision zone', v: '2.6 m dynamic buffer' },
+  { k: 'Object recognition', v: '312 labelled classes' }];
 
 
 const scenarioControls = [
-{ id: 'rain', label: 'Rain' },
-{ id: 'fog', label: 'Poor visibility' },
-{ id: 'night', label: 'Night' },
-{ id: 'traffic', label: 'Heavy traffic' },
-{ id: 'pedestrian', label: 'Pedestrian' },
-{ id: 'obstacle', label: 'Road obstacle' }] as
-const;
+  { id: 'rain', label: 'Rain' },
+  { id: 'fog', label: 'Poor visibility' },
+  { id: 'night', label: 'Night' },
+  { id: 'traffic', label: 'Heavy traffic' },
+  { id: 'pedestrian', label: 'Pedestrian' },
+  { id: 'obstacle', label: 'Road obstacle' }] as
+  const;
 
 type ScenarioId = (typeof scenarioControls)[number]['id'];
 
@@ -65,11 +65,11 @@ function GenerativeEnvironments() {
 
   React.useEffect(() => {
     if (isHorizontalScrolling) return;
-    
+
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % worldStates.length);
     }, 5000);
-    
+
     return () => clearInterval(interval);
   }, [isHorizontalScrolling]);
 
@@ -89,7 +89,7 @@ function GenerativeEnvironments() {
             speed={0.3}
             labels={false}
             ariaLabel={`Generated environment: ${state.label}`} />
-          
+
         </div>
         <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-void via-transparent to-void" />
 
@@ -98,7 +98,7 @@ function GenerativeEnvironments() {
           <Headline
             text="BUILD *THOUSANDS* OF WORLDS."
             className="mt-5 max-w-4xl text-[11vw] sm:text-[7.5vw] lg:text-[5vw]" />
-          
+
           <Lede className="mt-5 text-chalk/80">
             Generate different roads, cities, terrains, weather conditions, traffic patterns and physical
             environments without building each scenario by hand.
@@ -118,10 +118,9 @@ function GenerativeEnvironments() {
             </div>
             <div className="flex gap-1.5" aria-hidden="true">
               {worldStates.map((w, i) =>
-              <span
-                key={w.label}
-                className={`h-1 w-10 transition-colors duration-300 ease-out sm:w-16 ${
-                i === index ? 'bg-cyan' : 'bg-cyan/20'}`}
+                <span
+                  key={w.label}
+                  className={`h-1 w-10 transition-colors duration-300 ease-out sm:w-16 ${i === index ? 'bg-cyan' : 'bg-cyan/20'}`}
                 />
 
               )}
@@ -143,13 +142,13 @@ function Robotics() {
           viewport={{ once: true, margin: '-15%' }}
           transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
           className="relative h-[52vh] min-h-[320px] border border-cyan/20 lg:h-[68vh]">
-          
+
           <SimulationScene
             kind="robot"
             speed={0.05}
             labels
             ariaLabel="Simulated robot navigating a cell with a sensor sweep, planned path and collision boundary" />
-          
+
           <span className="absolute -left-px -top-px h-6 w-6 border-l-2 border-t-2 border-cyan" aria-hidden="true" />
           <span className="absolute -bottom-px -right-px h-6 w-6 border-b-2 border-r-2 border-cyan" aria-hidden="true" />
           <span className="absolute bottom-3 left-4 font-mono text-[10px] uppercase tracking-tech text-cyan/70">
@@ -162,14 +161,13 @@ function Robotics() {
           <Headline
             text="TRAIN MACHINES IN THE *VIRTUAL* WORLD."
             className="mt-5 text-[9vw] sm:text-[6vw] lg:text-[3.4vw]" />
-          
+
           <Lede className="mt-5">
-            Import a robot, attach your controller, and watch movement, perception and planning behave under real
-            physics — with every signal visible inside the scene.
+            Import a robot, attach your controller, and watch movement, perception and planning behave under real physics - with every signal visible inside the scene.
           </Lede>
           <dl className="mt-8 divide-y divide-cyan/12 border-y border-cyan/15">
             {roboticsSignals.map((s) =>
-            <div key={s.k} className="flex items-baseline justify-between gap-6 py-3">
+              <div key={s.k} className="flex items-baseline justify-between gap-6 py-3">
                 <dt className="font-mono text-[11px] uppercase tracking-tech text-cyan/70">{s.k}</dt>
                 <dd className="text-sm text-chalk/85">{s.v}</dd>
               </div>
@@ -197,17 +195,17 @@ function AutonomousVehicles() {
   const risk = Math.min(
     99,
     12 + (
-    active.rain ? 18 : 0) + (
-    active.fog ? 26 : 0) + (
-    active.night ? 14 : 0) + (
-    active.traffic ? 16 : 0) + (
-    active.pedestrian ? 12 : 0) + (
-    active.obstacle ? 15 : 0)
+      active.rain ? 18 : 0) + (
+      active.fog ? 26 : 0) + (
+      active.night ? 14 : 0) + (
+      active.traffic ? 16 : 0) + (
+      active.pedestrian ? 12 : 0) + (
+      active.obstacle ? 15 : 0)
   );
 
   const toggle = (id: ScenarioId) => setActive((a) => ({ ...a, [id]: !a[id] }));
   const reset = () =>
-  setActive({ rain: false, fog: false, night: false, traffic: false, pedestrian: false, obstacle: false });
+    setActive({ rain: false, fog: false, night: false, traffic: false, pedestrian: false, obstacle: false });
 
   return (
     <div id="autonomous" className="relative scroll-mt-28 px-5 py-24 sm:px-8 lg:py-32">
@@ -234,10 +232,9 @@ function AutonomousVehicles() {
               obstacle={active.obstacle}
               speed={0.24}
               labels
-              ariaLabel={`Autonomous vehicle simulation with ${weather} weather${active.night ? ', night' : ''}${
-              active.traffic ? ', heavy traffic' : ''}`
+              ariaLabel={`Autonomous vehicle simulation with ${weather} weather${active.night ? ', night' : ''}${active.traffic ? ', heavy traffic' : ''}`
               } />
-            
+
             <div className="pointer-events-none absolute left-4 top-4 flex flex-wrap gap-2">
               <span className="bg-void/70 px-2 py-1 font-mono text-[10px] uppercase tracking-tech text-cyan">
                 Run 0x{(risk * 977).toString(16).toUpperCase()}
@@ -249,18 +246,17 @@ function AutonomousVehicles() {
             <h3 className="font-mono text-[10px] uppercase tracking-tech text-cyan/70">Scenario controls</h3>
             <div className="mt-4 flex flex-wrap gap-2">
               {scenarioControls.map((s) =>
-              <button
-                key={s.id}
-                type="button"
-                onClick={() => toggle(s.id)}
-                aria-pressed={active[s.id]}
-                data-cursor="TOGGLE"
-                className={`border px-3 py-2 font-display text-[11px] font-semibold uppercase tracking-[0.14em] transition-colors duration-200 ease-out ${
-                active[s.id] ?
-                'border-cyan bg-cyan/15 text-cyan' :
-                'border-cyan/20 text-mist hover:border-cyan/50 hover:text-chalk'}`
-                }>
-                
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={() => toggle(s.id)}
+                  aria-pressed={active[s.id]}
+                  data-cursor="TOGGLE"
+                  className={`border px-3 py-2 font-display text-[11px] font-semibold uppercase tracking-[0.14em] transition-colors duration-200 ease-out ${active[s.id] ?
+                      'border-cyan bg-cyan/15 text-cyan' :
+                      'border-cyan/20 text-mist hover:border-cyan/50 hover:text-chalk'}`
+                  }>
+
                   {s.label}
                 </button>
               )}
@@ -277,7 +273,7 @@ function AutonomousVehicles() {
                     animate={{ width: `${visibility}%` }}
                     transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
                     className="h-full bg-cyan" />
-                  
+
                 </div>
               </div>
               <div>
@@ -290,13 +286,13 @@ function AutonomousVehicles() {
                     animate={{ width: `${risk}%` }}
                     transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
                     className="h-full bg-orange-300/80" />
-                  
+
                 </div>
               </div>
               <p className="text-xs leading-relaxed text-mist">
                 {risk > 60 ?
-                'Compound conditions. This is the class of scenario that rarely survives contact with a real test track.' :
-                'Adjust conditions to compound the scenario and watch the sensor envelope contract.'}
+                  'Compound conditions. This is the class of scenario that rarely survives contact with a real test track.' :
+                  'Adjust conditions to compound the scenario and watch the sensor envelope contract.'}
               </p>
             </div>
 
@@ -309,7 +305,7 @@ function AutonomousVehicles() {
                 onClick={reset}
                 data-cursor="RESET"
                 className="w-full py-2 font-mono text-[10px] uppercase tracking-tech text-mist transition-colors duration-200 ease-out hover:text-cyan">
-                
+
                 Reset conditions
               </button>
             </div>

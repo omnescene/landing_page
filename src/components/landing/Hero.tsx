@@ -86,10 +86,10 @@ export function Hero() {
               <span className="h-1.5 w-1.5 animate-pulseline bg-cyan" aria-hidden="true" />
               <TechLabel>Generative physical-world simulation</TechLabel>
             </div>
-            <h1 className="mt-5 font-display text-[13vw] font-extrabold uppercase leading-[0.85] tracking-[-0.02em] text-chalk sm:text-[9vw] lg:text-[5.9vw]">
-              Generate the <span className="text-cyan [text-shadow:0_0_40px_rgba(46,230,214,0.45)]">world</span>.
+            <h1 className="mt-5 font-display text-[10vw] font-extrabold uppercase leading-[0.85] tracking-[-0.02em] text-chalk sm:text-[7.5vw] lg:text-[4.8vw]">
+             Transform Real <span className="text-cyan [text-shadow:0_0_40px_rgba(46,230,214,0.45)]">world</span>.
               <br />
-              Simulate <span className="text-cyan [text-shadow:0_0_40px_rgba(46,230,214,0.45)]">every</span> possibility.
+              Complexity Into  <span className="text-cyan [text-shadow:0_0_40px_rgba(46,230,214,0.45)]">Scalable</span> AI-Powered Simulations.
             </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-chalk/80 sm:text-lg">
               AI-powered simulation for robotics and autonomous systems.
@@ -100,7 +100,7 @@ export function Hero() {
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <ActionButton onClick={() => scrollToSection('platform')} cursorLabel="EXPLORE">
-                Explore OmneScene
+                Explore OmneCore 
               </ActionButton>
               <ActionButton
                 variant="ghost"

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowRightIcon, BookOpenIcon, PlusIcon, ShieldCheckIcon, UsersIcon } from 'lucide-react';
+import { ArrowRightIcon, BookOpenIcon, MapPinIcon, PhoneIcon, PlusIcon, ShieldCheckIcon, UsersIcon } from 'lucide-react';
 import { Eyebrow, Headline, Lede } from '../Typography';
 import { ActionButton } from '../Button';
 import { ContactForm } from '../ContactForm';
@@ -86,7 +86,7 @@ function Trust() {
   {
     icon: UsersIcon,
     title: 'Built for engineering teams',
-    copy: 'Designed with autonomy, controls and validation engineers working on physical AI — not for a marketing dashboard.'
+    copy: 'Designed with autonomy, controls and validation engineers working on physical AI -not for a marketing dashboard.'
   },
   {
     icon: ShieldCheckIcon,
@@ -165,14 +165,34 @@ function Contact() {
                   </a>
                 </dd>
               </div>
+              {contactInfo.offices.map((office) =>
+              <div key={office.region} className="flex gap-3">
+                <MapPinIcon className="mt-0.5 h-4 w-4 shrink-0 text-cyan/70" />
+                <div>
+                  <dt className="font-mono text-[10px] uppercase tracking-tech text-cyan/70">{office.region}</dt>
+                  <dd className="mt-1 text-sm text-chalk">{office.company}</dd>
+                  <dd className="mt-1 text-sm leading-relaxed text-mist">{office.address}</dd>
+                  <dd className="mt-1">
+                    <a href={`tel:${office.phoneHref}`} className="inline-flex items-center gap-1.5 text-sm text-mist transition-colors duration-200 ease-out hover:text-cyan" data-cursor="CALL">
+                      <PhoneIcon className="h-3.5 w-3.5" />
+                      {office.phone}
+                    </a>
+                  </dd>
+                </div>
+              </div>
+              )}
               <div>
-                <dt className="font-mono text-[10px] uppercase tracking-tech text-cyan/70">Headquarters</dt>
-                <dd className="text-sm text-mist">{contactInfo.address}</dd>
+                <a
+                  href="/sitemap.xml"
+                  className="inline-flex text-sm text-cyan transition-colors duration-200 ease-out hover:text-cyan-soft"
+                  data-cursor="OPEN">
+                  Sitemap
+                </a>
               </div>
             </dl>
           </div>
 
-          <div className="border border-cyan/20 bg-abyss/60 p-6 backdrop-blur-sm sm:p-8">
+          <div className="mx-auto w-full max-w-2xl border border-cyan/20 bg-abyss/60 p-4 backdrop-blur-sm sm:p-8 lg:mx-0 lg:max-w-none">
             <ContactForm />
           </div>
         </div>

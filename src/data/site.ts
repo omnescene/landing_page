@@ -17,21 +17,38 @@ export const navLinks: NavLink[] = [
 
 
 /**
- * Social profiles. Replace these URLs with the real OmneScene accounts —
+ * Social profiles. Replace these URLs with the real OmneScene accounts:
  * this is the single place they are defined.
  */
 export const socialLinks = [
 { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/company/omnescene' },
 { id: 'x', label: 'X', href: 'https://x.com/OmneScene8d' },
 { id: 'facebook', label: 'Facebook', href: 'https://www.facebook.com/OmneScene' },
-{ id: 'youtube', label: 'YouTube', href: 'https://www.youtube.com/@OmneScene' }];
+{ id: 'youtube', label: 'YouTube', href: 'https://www.youtube.com/@OmneScene' },
+{ id: 'f6s', label: 'F6S', href: 'https://www.f6s.com/omnescene-ai-inc' },
+{ id: 'crunchbase', label: 'Crunchbase', href: 'https://www.crunchbase.com/organization/omnescene-ai-inc' }];
 
 
 export const contactInfo = {
   email: 'support@omnescene.com',
-  sales: 'sales@omnescene.com',
   phone: '+1 (415) 555-0148',
   address: '73 Havelock Road, Colombo 05, Sri Lanka',
+  offices: [
+  {
+    region: 'Sri Lanka',
+    company: 'OmneScene Technologies (Pvt) Ltd.',
+    address: '73 Havelock Road, Colombo 05, Sri Lanka',
+    phone: '+94 11 239 6745',
+    phoneHref: '+94112396745'
+  },
+  {
+    region: 'USA',
+    company: 'OmneScene AI Inc.',
+    address: '201 Mission Street, Suite 1200, San Francisco, CA 94105, USA',
+    phone: '+1 415 555 8743',
+    phoneHref: '+14155558743'
+  }],
+  website: 'https://omnescene.com/',
   domain: 'OMNESCENE.COM'
 };
 
@@ -132,7 +149,7 @@ export const solutions = [
   id: 'industrial',
   title: 'Industrial Automation',
   copy: 'Test complex machine behavior safely.',
-  detail: 'Model whole cells — conveyors, AGVs, cobots — and find the deadlock in simulation instead of on a stopped line.',
+  detail: 'Model whole cells, including conveyors, AGVs and cobots, and find the deadlock in simulation instead of on a stopped line.',
   metric: '0',
   metricLabel: 'line stoppages'
 },
@@ -154,6 +171,10 @@ export const pricingTiers = [
   price: 'From $299',
   monthlyPrice: 'From $299',
   annualPrice: 'From $2,990',
+  paymentLinks: {
+    monthly: 'https://buy.stripe.com/test_14A14p4ZqbCecyNbLfawo00',
+    annual: 'https://buy.stripe.com/test_4gM8wR2RigWy0Q5dTnawo01'
+  },
   cadence: 'sandbox access',
   capacity: '250 simulation hours / month',
   features: [
@@ -162,7 +183,7 @@ export const pricingTiers = [
   { label: 'API access', value: 'Read-only' },
   { label: 'Collaboration', value: 'Up to 3 seats' },
   { label: 'Analytics', value: 'Run summaries' },
-  { label: 'Enterprise deployment', value: '—' },
+  { label: 'Enterprise deployment', value: 'Not included' },
   { label: 'Support', value: 'Community' }]
 
 },
@@ -173,6 +194,10 @@ export const pricingTiers = [
   price: 'From $4,800',
   monthlyPrice: 'From $4,800',
   annualPrice: 'From $48,000',
+  paymentLinks: {
+    monthly: 'https://buy.stripe.com/test_cNi7sN8bC35IdCR7uZawo02',
+    annual: 'https://buy.stripe.com/test_6oU5kF9fGgWycyN6qVawo03'
+  },
   cadence: 'per month',
   capacity: '10,000 simulation hours / month',
   features: [
@@ -219,7 +244,7 @@ export const faqs = [
 },
 {
   q: 'Can I generate different environments?',
-  a: 'That is the core of the platform. Describe a scenario family once and the variation engine produces thousands of distinct worlds — different roads, terrains, cities, weather and traffic patterns — without hand-building each one.'
+  a: 'That is the core of the platform. Describe a scenario family once and the variation engine produces thousands of distinct worlds, including different roads, terrains, cities, weather and traffic patterns, without hand-building each one.'
 },
 {
   q: 'Does OmneScene support robotics testing?',
@@ -241,15 +266,22 @@ export const faqs = [
 
 export const team = [
 {
+  name: 'Dhanushka Kethan',
+  role: 'Founder',
+  bio: 'Dhanushka founded OmneScene to make physical-world AI faster, safer and more scalable through generative simulation.',
+  image: "/founder.png",
+  linkedin: 'https://www.linkedin.com/in/dhanushka-kethan'
+},
+{
   name: 'Dr. Elena Marchetti',
-  role: 'Co-Founder & Chief Executive',
+  role: 'Chief Executive',
   bio: 'Previously led validation engineering for an autonomous trucking programme. Elena started OmneScene after watching a fleet spend eighteen months chasing an edge case that took nine minutes to reproduce in simulation.',
   image: "/bacd294e-f7b8-409b-964c-691ca7d62da9.jpg",
   linkedin: 'https://www.linkedin.com/in/omnescene-elena-marchetti'
 },
 {
   name: 'Arjun Nair',
-  role: 'Co-Founder & Chief Technology Officer',
+  role: 'Chief Technology Officer',
   bio: 'Physics engine architect with a decade in real-time contact dynamics. Arjun owns the simulation core and its faster-than-real-time distributed scheduler.',
   image: "/a0ad093f-31d1-4da5-a577-77154b08a65e.jpg",
   linkedin: 'https://www.linkedin.com/in/omnescene-arjun-nair'

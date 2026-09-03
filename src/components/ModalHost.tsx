@@ -127,8 +127,8 @@ export function ModalHost() {
           <BookOpenIcon className="mt-1 h-5 w-5 shrink-0 text-cyan" />
           <div className="space-y-3 text-sm leading-relaxed text-mist">
             <p>
-              The OmneScene documentation portal — scenario DSL reference, sensor models, physics configuration and
-              the REST/gRPC API — is opening alongside general availability.
+              The OmneScene documentation portal, including scenario DSL reference, sensor models, physics configuration and
+              the REST/gRPC API, is opening alongside general availability.
             </p>
             <p>
               Request access and we will send the current engineering handbook, including the OpenUSD import guide

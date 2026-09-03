@@ -64,6 +64,21 @@ export function Navigation() {
       <header className="pointer-events-none fixed inset-x-0 top-0 z-[70] px-3 pt-3 sm:px-6 sm:pt-5">
         <div className="pointer-events-auto mx-auto flex max-w-[1500px] items-center gap-3">
           {/* System control */}
+          {location.pathname === '/product' ?
+          <a
+            href="https://client.omnescene.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cursor="HOME"
+            aria-label="OmneScene dashboard"
+            className="group flex shrink-0 items-center transition-colors duration-200 ease-out"
+          >
+            <img
+              src="/logo.svg"
+              alt="OmneScene"
+              className="h-20 w-auto sm:h-24"
+            />
+          </a> :
           <Link
             to="/"
             data-cursor="HOME"
@@ -75,7 +90,7 @@ export function Navigation() {
               alt="OmneScene"
               className="h-20 w-auto sm:h-24"
             />
-          </Link>
+          </Link>}
 
           {/* Floating menu */}
           <nav
@@ -119,13 +134,21 @@ export function Navigation() {
               <span className="text-chalk">{currentLabel}</span>
             </div>
 
+            {location.pathname === '/product' ?
+            <a
+              href="https://client.omnescene.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="OPEN"
+              className="hidden bg-cyan px-4 py-2.5 font-display text-[11px] font-bold uppercase tracking-[0.18em] text-void transition-colors duration-200 ease-out hover:bg-cyan-soft md:block">
+              OmneCore
+            </a> :
             <Link
               to="/product"
               data-cursor="OPEN"
               className="hidden bg-cyan px-4 py-2.5 font-display text-[11px] font-bold uppercase tracking-[0.18em] text-void transition-colors duration-200 ease-out hover:bg-cyan-soft md:block">
-              
-              OmneScene
-            </Link>
+              OmneCore
+            </Link>}
 
             <button
               type="button"

@@ -14,6 +14,7 @@ import { About } from './pages/About';
 import { Terms } from './pages/Terms';
 import { Privacy } from './pages/Privacy';
 import { Product } from './pages/Product';
+import { CookieConsent, type CookieConsentValue } from './components/CookieConsent';
 
 function ScrollReset() {
   const location = useLocation();
@@ -24,8 +25,9 @@ function ScrollReset() {
   return null;
 }
 
-function TawkChat() {
+function TawkChat({ enabled }: { enabled: boolean }) {
   useEffect(() => {
+    if (!enabled) return;
     const tawkWindow = window as Window & {
       Tawk_API?: Record<string, unknown>;
       Tawk_LoadStart?: Date;
@@ -44,13 +46,14 @@ function TawkChat() {
     script.charset = 'UTF-8';
     script.setAttribute('crossorigin', '*');
     document.body.appendChild(script);
-  }, []);
+  }, [enabled]);
 
   return null;
 }
 
 function Shell() {
   const location = useLocation();
+  const [cookieConsent, setCookieConsent] = React.useState<CookieConsentValue | null>(null);
   return (
     <>
       <a
@@ -120,7 +123,8 @@ function Shell() {
       </div>
       <SearchOverlay />
       <ModalHost />
-      <TawkChat />
+      <CookieConsent onChange={setCookieConsent} />
+      <TawkChat enabled={cookieConsent === 'accepted'} />
     </>);
 
 }
