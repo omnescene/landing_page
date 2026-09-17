@@ -185,7 +185,7 @@ export function Footer() {
                 <div>
                   <span className="block font-mono text-[10px] uppercase tracking-tech text-cyan/60">USA</span>
                   <strong className="mt-1 block font-display text-sm uppercase tracking-[0.08em] text-chalk">
-                    OmneScene AI Inc.
+                    OmneScene Technologies Inc
                   </strong>
                   <span className="mt-2 block leading-relaxed">
                     201 Mission Street, Suite 1200,<br /> San Francisco, CA 94105, USA

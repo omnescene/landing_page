@@ -43,7 +43,7 @@ export const contactInfo = {
   },
   {
     region: 'USA',
-    company: 'OmneScene AI Inc.',
+    company: 'OmneScene Technologies Inc',
     address: '201 Mission Street, Suite 1200, San Francisco, CA 94105, USA',
     phone: '+1 415 555 8743',
     phoneHref: '+14155558743'
