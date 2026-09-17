@@ -87,7 +87,7 @@ export function Hero() {
               <TechLabel>Generative physical-world simulation</TechLabel>
             </div>
             <h1 className="mt-5 font-display text-[10vw] font-extrabold uppercase leading-[0.85] tracking-[-0.02em] text-chalk sm:text-[7.5vw] lg:text-[4.8vw]">
-             Transform Real <span className="text-cyan [text-shadow:0_0_40px_rgba(46,230,214,0.45)]">world</span>.
+             Transform Real <span className="text-cyan [text-shadow:0_0_40px_rgba(46,230,214,0.45)]">world</span>
               <br />
               Complexity Into  <span className="text-cyan [text-shadow:0_0_40px_rgba(46,230,214,0.45)]">Scalable</span> AI-Powered Simulations.
             </h1>
