@@ -9,6 +9,9 @@
     # Base path (use / if site is in root)
     RewriteBase /
 
+    # Do not serve the SPA document for missing build assets.
+    RewriteRule ^assets/ - [L]
+
     # Serve existing files or directories
     RewriteCond %{REQUEST_FILENAME} -f [OR]
     RewriteCond %{REQUEST_FILENAME} -d
@@ -17,6 +20,12 @@
     # Rewrite all other requests to index.html
     RewriteRule . /index.html [L]
 
+</IfModule>
+
+<IfModule mod_headers.c>
+    <FilesMatch "^index\.html$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+    </FilesMatch>
 </IfModule>
 
 # php -- BEGIN cPanel-generated handler, do not edit

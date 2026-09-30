@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowRightIcon, BookOpenIcon, MapPinIcon, PhoneIcon, PlusIcon, ShieldCheckIcon, UsersIcon } from 'lucide-react';
+import { ActivityIcon, ArrowRightIcon, BookOpenIcon, MapPinIcon, PhoneIcon, PlusIcon, ShieldCheckIcon, UsersIcon, ZapIcon } from 'lucide-react';
 import { Eyebrow, Headline, Lede } from '../Typography';
 import { ActionButton } from '../Button';
 import { ContactForm } from '../ContactForm';
@@ -207,19 +207,35 @@ function FinalCta() {
 
   return (
     <div className="relative px-5 pb-28 sm:px-8">
-      <div className="mx-auto flex max-w-[1500px] flex-col items-start gap-8 border-t border-cyan/20 pt-14 lg:flex-row lg:items-end lg:justify-between">
-        <h2 className="max-w-3xl font-display text-[11vw] font-extrabold uppercase leading-[0.9] text-chalk sm:text-[7vw] lg:text-[4.2vw]">
-          Generate the world.
-          <br />
-          <span className="text-cyan">Simulate every possibility.</span>
-        </h2>
-        <div className="flex flex-wrap gap-3">
-          <ActionButton onClick={() => openModal('register')} cursorLabel="START">
-            Start with OmneScene
-          </ActionButton>
-          <ActionButton variant="ghost" onClick={() => goToSection('architecture')} cursorLabel="VIEW">
-            View workflow
-          </ActionButton>
+      <div className="mx-auto max-w-[1500px] border-t border-cyan/20 pt-14">
+        <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <h2 className="max-w-3xl font-display text-[11vw] font-extrabold uppercase leading-[0.9] text-chalk sm:text-[7vw] lg:text-[4.2vw]">
+            Generate the world.
+            <br />
+            <span className="text-cyan">Simulate every possibility.</span>
+          </h2>
+          <div className="flex flex-wrap gap-3">
+            <ActionButton onClick={() => openModal('register')} cursorLabel="START">
+              Start with OmneScene
+            </ActionButton>
+            <ActionButton variant="ghost" onClick={() => goToSection('architecture')} cursorLabel="VIEW">
+              View workflow
+            </ActionButton>
+          </div>
+        </div>
+        <div className="mx-auto mt-10 grid w-full max-w-5xl justify-items-center gap-5 border-t border-cyan/20 pt-5 font-mono text-xs text-mist sm:grid-cols-3 sm:gap-4">
+          <div className="flex items-center justify-center gap-2.5 text-center">
+            <ShieldCheckIcon aria-hidden="true" className="h-4 w-4 shrink-0 text-cyan" />
+            <span>Enterprise SOC2 Compliant</span>
+          </div>
+          <div className="flex items-center justify-center gap-2.5 text-center">
+            <ZapIcon aria-hidden="true" className="h-4 w-4 shrink-0 text-cyan" />
+            <span>Sub-10ms Guarantee</span>
+          </div>
+          <div className="flex items-center justify-center gap-2.5 text-center">
+            <ActivityIcon aria-hidden="true" className="h-4 w-4 shrink-0 text-cyan" />
+            <span>99.99% API Uptime</span>
+          </div>
         </div>
       </div>
     </div>);

@@ -32,9 +32,11 @@ If you don't have reCAPTCHA keys yet:
 1. Go to https://www.google.com/recaptcha/admin
 2. Create a new site:
    - **Display name**: OmneScene
-   - **reCAPTCHA type**: reCAPTCHA v3
+   - **reCAPTCHA type**: Challenge (v2) > "I'm not a robot" Checkbox
    - **Domains**: omnescene.com (and www.omnescene.com)
 3. Copy the **Site Key** and **Secret Key**
+
+`VITE_RECAPTCHA_SITE_KEY` is embedded into the frontend at build time. Set it in `.env.local` before running `npm run build`, then upload the newly generated `dist` contents. `RECAPTCHA_SECRET_KEY` is used by the server-side API.
 
 ### Step 3: How the API Works
 
