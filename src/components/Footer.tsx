@@ -170,13 +170,13 @@ export function Footer() {
                     OmneScene Technologies (Pvt) Ltd.
                   </strong>
                   <span className="mt-2 block leading-relaxed">
-                    73 Havelock Road, Colombo 05,<br /> Sri Lanka
+                    71 Queen Elizabeth Dr,<br /> Nuwara Eliya 22200
                   </span>
                   <a
-                    href="tel:+94112396745"
+                    href="tel:0786047788"
                     data-cursor="CALL"
                     className="mt-2 block transition-colors duration-200 ease-out hover:text-cyan">
-                    +94 11 239 6745
+                    0786047788
                   </a>
                 </div>
               </div>
@@ -207,7 +207,7 @@ export function Footer() {
                 Sri Lanka Office
               </div>
               <LocationMap
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3277.087510961921!2d79.86504938644204!3d6.890413949465937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25bd083ab548d%3A0x48969b6c62cfbb94!2s73%20Havelock%20Rd%2C%20Colombo%2006000!5e1!3m2!1sen!2slk!4v1787985693526!5m2!1sen!2slk"
+                src="https://maps.google.com/maps?q=71%20Queen%20Elizabeth%20Dr%2C%20Nuwara%20Eliya%2022200&output=embed"
                 title="OmneScene Sri Lanka location"
               />
             </div>

@@ -31,15 +31,15 @@ export const socialLinks = [
 
 export const contactInfo = {
   email: 'support@omnescene.com',
-  phone: '+1 (415) 555-0148',
-  address: '73 Havelock Road, Colombo 05, Sri Lanka',
+  phone: '0786047788',
+  address: '71 Queen Elizabeth Dr, Nuwara Eliya 22200',
   offices: [
   {
     region: 'Sri Lanka',
     company: 'OmneScene Technologies (Pvt) Ltd.',
-    address: '73 Havelock Road, Colombo 05, Sri Lanka',
-    phone: '+94 11 239 6745',
-    phoneHref: '+94112396745'
+    address: '71 Queen Elizabeth Dr, Nuwara Eliya 22200',
+    phone: '0786047788',
+    phoneHref: '0786047788'
   },
   {
     region: 'USA',
